@@ -5,13 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider;
-    public bool canJump = true, grounded = true, tpCD;
+    public float speed, divider, launchSpeed;
+    public bool canJump = true, grounded = true, holdRope = false, grabbing = false;
     public Arm hitbox;
     private Vector3 spawnPos;
     public GameObject portalCD;
     public bool isMouse;
     Vector3 mousePos;
+    public GameObject portalCD, rope;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0))
+        if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
             isMouse = false;
             hitbox.punch = true;
@@ -33,6 +35,27 @@ public class Player : MonoBehaviour
                 hitbox.punch = false;
             }
             StartCoroutine(Stop());
+        } 
+        if (!holdRope && Input.GetButtonDown("Grab"))
+        {
+            grabbing = true;
+            IEnumerator Stop()
+            {
+                yield return new WaitForSeconds(0.05f);
+                grabbing = false;
+            }
+            StartCoroutine(Stop());
+        }
+        if(holdRope && Input.GetButtonDown("Grab"))
+        {
+            rb.velocity = rope.GetComponentInParent<Rigidbody2D>().velocity.normalized*launchSpeed;
+            Destroy(rope);
+            holdRope = false;
+        }
+        if (holdRope)
+            rb.MovePosition(rope.transform.position);
+
+
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {

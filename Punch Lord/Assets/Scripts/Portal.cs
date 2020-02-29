@@ -20,7 +20,7 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && !collision.gameObject.GetComponent<Player>().tpCD && gameObject != collision.gameObject.GetComponent<Player>().portalCD)
+        if (collision.gameObject.tag == "Player" && gameObject != collision.gameObject.GetComponent<Player>().portalCD)
         {
             collision.gameObject.GetComponent<Player>().portalCD = other;
             collision.gameObject.transform.position = other.transform.position;
