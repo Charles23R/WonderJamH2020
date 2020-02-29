@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class goblinIntro : MonoBehaviour
 {
     public GameObject goblin;
-    public GameObject player;
+    public GameObject player, realPlayer;
     public GameObject black;
     public Transform goblindesiredpos;
     public GameObject textbox1, textbox2;
@@ -17,8 +18,22 @@ public class goblinIntro : MonoBehaviour
         StartCoroutine(GoblinEscape());
     }
 
+    IEnumerator FadeIn()
+    {
+        float alpha = 1;
+        while (alpha > 0)
+        {
+            alpha -= 0.01f;
+            black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+        yield return null;
+    }
+
     IEnumerator GoblinEscape()
     {
+        yield return new WaitForSeconds(1.5f);
+        yield return StartCoroutine(FadeIn());
         black.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         goblin.GetComponent<SpriteRenderer>().flipX = true;
@@ -29,6 +44,7 @@ public class goblinIntro : MonoBehaviour
             gmov.goRight();
             yield return null;
         }
+        Destroy(goblin);
         yield return null;
         StartCoroutine(Beginning());
     }
@@ -36,15 +52,17 @@ public class goblinIntro : MonoBehaviour
     IEnumerator Beginning()
     {
         textbox1.SetActive(true);
-        while (!Input.GetKeyDown(KeyCode.Space))
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
         {
             yield return null;
         }
         textbox1.SetActive(false);
         yield return new WaitForSeconds(1f);
         textbox2.SetActive(true);
-        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
-        while (!Input.GetKeyDown(KeyCode.Space))
+        player.SetActive(false);
+        realPlayer.SetActive(true);
+        realPlayer.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
         {
             yield return null;
         }

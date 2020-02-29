@@ -40,12 +40,12 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A) && canMove)
+        if ((Input.GetKey(KeyCode.A)|| Input.GetAxis("Horizontal") < 0) && canMove)
         {
             goLeft();
             animator.SetBool("isWalking", true);
         }
-        if (Input.GetKey(KeyCode.D) && canMove)
+        if ((Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0) && canMove)
         {
             goRight();
             animator.SetBool("isWalking", true);
@@ -55,7 +55,7 @@ public class movement : MonoBehaviour
     void Update()
     {
         Vector2 position2d = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y); 
-        if (Physics2D.Raycast(position2d - new Vector2(0,characterHeight/2), Vector2.down, characterHeight))
+        if (Physics2D.Raycast(position2d - new Vector2(0,characterHeight/2), Vector2.down, 0.01f))
         {
             canJump = true;
         }
@@ -63,11 +63,11 @@ public class movement : MonoBehaviour
         {
             canJump = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && canJump && canMove)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump")) && canJump && canMove)
         {
             Jump();
         }
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if ((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) && (Input.GetAxis("Horizontal") == 0))
         {
             animator.SetBool("isWalking", false);
         }
