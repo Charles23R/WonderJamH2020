@@ -31,7 +31,7 @@ public class Arm : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (punch)
+        if (punch&& !collision.gameObject.CompareTag("Vent"))
         {
             GetComponentInParent<Player>().Jump();
             if (collision.gameObject.CompareTag("Interactible"))
