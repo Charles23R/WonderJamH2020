@@ -47,5 +47,10 @@ public class Player : MonoBehaviour
             grounded = true;
             canJump = true;
         }
+        if (collision.gameObject.CompareTag("Interactible") && hitbox.active)
+        {
+            collision.gameObject.GetComponent<Interactible>().lives--;
+            Debug.Log(collision.gameObject.GetComponent<Interactible>().lives);
+        }
     }
 }

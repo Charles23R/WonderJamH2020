@@ -7,7 +7,7 @@ public class Interactible : MonoBehaviour
     public float idleSpeed;
     public float lives;
     public float bounceability;
-    //public Player player;
+    public Player player;
 
     // Update is called once per frame
     void Update()
@@ -15,15 +15,11 @@ public class Interactible : MonoBehaviour
        
     }
 
-    /*
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (player.isAttacking())
-        {
             lives--;
-        }
     }
-    */
+    
 
     private void FixedUpdate()
     {
@@ -36,6 +32,6 @@ public class Interactible : MonoBehaviour
     void DisableInstance()
     {
         // Removes this script instance from the game object
-        this.enabled = false;
+        this.gameObject.SetActive(false);
     }
 }
