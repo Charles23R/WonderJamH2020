@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public float speed, divider;
     public bool canJump = true, grounded = true;
     public Arm hitbox;
