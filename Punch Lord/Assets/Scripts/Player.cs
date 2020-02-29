@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider, launchSpeed, dashSpeed;
+    public float speed, divider, dashSpeed;
     public bool canJump = true, grounded = true, holdRope = false, grabbing = false, dashUsed = false;
     public Arm hitbox;
     private Vector3 spawnPos;
@@ -68,7 +68,8 @@ public class Player : MonoBehaviour
         }
         if(holdRope && Input.GetButtonDown("Grab"))
         {
-            rb.velocity = rope.GetComponentInParent<Rigidbody2D>().velocity.normalized*launchSpeed;
+            RotationThing rt = rope.transform.parent.GetComponentInParent<RotationThing>();
+            rb.velocity = rope.transform.right * rt.launchSpeed * rt.cosAnswer * (Vector2.Distance(rope.transform.parent.parent.position,rope.transform.position)/rt.maxDistance);
             Destroy(rope);
             holdRope = false;
         }
