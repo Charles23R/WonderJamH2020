@@ -6,9 +6,10 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed, divider;
-    public bool canJump = true, grounded = true;
+    public bool canJump = true, grounded = true, tpCD;
     public Arm hitbox;
     private Vector3 spawnPos;
+    public GameObject portalCD;
 
     // Start is called before the first frame update
     void Start()
@@ -83,4 +84,5 @@ public class Player : MonoBehaviour
         }
         this.transform.position = spawnPos;
     }
+
 }
