@@ -616,7 +616,7 @@ MonoBehaviour:
   jump: 300
   canMove: 0
   canJump: 0
-  characterHeight: 0.21
+  characterHeight: 1.625504
 --- !u!95 &893545406
 Animator:
   serializedVersion: 3

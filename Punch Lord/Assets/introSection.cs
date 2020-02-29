@@ -27,7 +27,7 @@ public class introSection : MonoBehaviour
             yield return null;
         }
         textBox.SetActive(true);
-        while (!Input.GetKeyDown(KeyCode.Space))
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
         {
             yield return null;
         }
