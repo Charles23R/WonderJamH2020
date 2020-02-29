@@ -22,6 +22,15 @@ public class Arm : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
         }
 
+        else if (this.gameObject.GetComponentInParent<Player>().isMouse)
+        {
+            var pos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector2 aim = new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y);
+            float angle = Mathf.Atan2(-aim.y, -aim.x) * Mathf.Rad2Deg; ;
+            transform.eulerAngles = new Vector3(0, 0, angle - 90);
+        }
+
+
     }
 
     private void OnEnable()

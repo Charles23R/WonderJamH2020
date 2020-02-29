@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public bool canJump = true, grounded = true;
     public Arm hitbox;
     private Vector3 spawnPos;
+    public bool isMouse;
+    Vector3 mousePos;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0))
         {
+            isMouse = false;
             hitbox.punch = true;
             IEnumerator Stop()
             {
@@ -29,8 +32,22 @@ public class Player : MonoBehaviour
                 hitbox.punch = false;
             }
             StartCoroutine(Stop());
-        } 
-
+        }
+        else if ((Input.GetButtonDown("Jump") && isMouse))
+        {
+            hitbox.punch = true;
+            IEnumerator Stop()
+            {
+                yield return new WaitForSeconds(0.05f);
+                hitbox.punch = false;
+            }
+            StartCoroutine(Stop());
+        }
+        if(Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        {
+            isMouse = true;
+        }
+        mousePos = Input.mousePosition;
     }
     private void FixedUpdate()
     {
@@ -42,12 +59,21 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
+        var pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 aim = new Vector2(0,0);
         Time.timeScale = 1;
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
         grounded = false;
-        Vector2 aim = new Vector2(-Input.GetAxisRaw("Horizontal"), -Input.GetAxisRaw("Vertical"));
+        if (isMouse)
+        {
+            aim = new Vector2(-(Input.mousePosition.x - pos.x), -(Input.mousePosition.y - pos.y));
+        }
+        else
+        {
+            aim = new Vector2(-Input.GetAxisRaw("Horizontal"), -Input.GetAxisRaw("Vertical"));
+        }
         rb.velocity = Vector2.zero;
         rb.AddForce(aim.normalized * speed);
+        
     }
     public void Jump(Vector2 aim)
     {
