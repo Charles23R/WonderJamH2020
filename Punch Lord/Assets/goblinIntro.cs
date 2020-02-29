@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class goblinIntro : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class goblinIntro : MonoBehaviour
     IEnumerator EndFirstRoomCoroutine()
     {
         yield return StartCoroutine(FadeOut());
+        SceneManager.LoadScene(4);
         yield return null;
     }
 
