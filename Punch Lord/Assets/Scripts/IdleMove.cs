@@ -20,7 +20,7 @@ public class IdleMove : MonoBehaviour
         transform.Translate(transform.position + new Vector3(translateX, translateY, 0) * moveTime * Time.deltaTime);
     }
 
-    
+    /*
     IEnumerator StartMove()
     {
 
@@ -47,4 +47,5 @@ public class IdleMove : MonoBehaviour
                             (directionOfTravel.z * inter.idleSpeed * Time.deltaTime),
                             Space.World);
     }
+    */
 }
