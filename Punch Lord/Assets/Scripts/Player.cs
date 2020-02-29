@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public float speed, divider;
     public bool canJump = true, grounded = true;
-    public GameObject hitbox;
+    public Arm hitbox;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +18,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0))
         {
-            hitbox.SetActive(true);
+            hitbox.punch = true;
+            IEnumerator Stop()
+            {
+                yield return new WaitForSeconds(0.05f);
+                hitbox.punch = false;
+            }
+            StartCoroutine(Stop());
         } 
 
     }

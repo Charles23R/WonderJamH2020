@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &50382468
 Transform:
   m_ObjectHideFlags: 0
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a52e14c0293eb48a93d52a284bab14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punch: 0
 --- !u!1 &480339273
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ MonoBehaviour:
   divider: 1.02
   canJump: 1
   grounded: 1
-  hitbox: {fileID: 50382467}
+  hitbox: {fileID: 50382471}
 --- !u!50 &480339275
 Rigidbody2D:
   serializedVersion: 4
