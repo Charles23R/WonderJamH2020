@@ -43,6 +43,7 @@ public class Interactible : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeRespawn);
         this.gameObject.GetComponent<Collider2D>().enabled = true;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        lives = initialLives;
         yield return null;
     }
 }

@@ -31,7 +31,7 @@ public class Arm : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (punch&& !collision.gameObject.CompareTag("Vent"))
+        if (punch&& !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone"))
         {
             GetComponentInParent<Player>().Jump();
             if (collision.gameObject.CompareTag("Interactible"))
