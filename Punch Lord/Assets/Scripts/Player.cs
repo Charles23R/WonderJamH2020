@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider, launchSpeed;
-    public bool canJump = true, grounded = true, holdRope = false, grabbing = false;
+    public float speed, divider, launchSpeed, dashSpeed;
+    public bool canJump = true, grounded = true, holdRope = false, grabbing = false, dashUsed = false;
     public Arm hitbox;
     private Vector3 spawnPos;
     public bool isMouse;
@@ -45,6 +45,12 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(Stop());
         }
+        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        {
+            dashUsed = true;
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashSpeed);
+        }
         if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             isMouse = true;
@@ -80,6 +86,7 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
+        dashUsed = false;
         var pos = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 aim = new Vector2(0,0);
         Time.timeScale = 1;
@@ -98,6 +105,7 @@ public class Player : MonoBehaviour
     }
     public void Jump(Vector2 aim)
     {
+        dashUsed = false;
         grounded = false;
         rb.velocity = Vector2.zero;
         rb.AddForce(aim * speed);
@@ -109,6 +117,7 @@ public class Player : MonoBehaviour
         {
             grounded = true;
             canJump = true;
+            dashUsed = false;
         }
     }
 
