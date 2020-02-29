@@ -18,17 +18,6 @@ public class Interactible : MonoBehaviour
         initialLives = lives;
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        /*
-        if (other.gameObject.GetComponent<Arm>().punch)
-        {
-            other.gameObject.GetComponent<Arm>().punch = false;
-            lives--;
-        }
-        */
-    }
-    
 
     private void FixedUpdate()
     {
