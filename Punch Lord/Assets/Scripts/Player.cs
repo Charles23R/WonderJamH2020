@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public bool canJump = true, grounded = true, holdRope = false, grabbing = false;
     public Arm hitbox;
     private Vector3 spawnPos;
-    public GameObject portalCD;
     public bool isMouse;
     Vector3 mousePos;
     public GameObject portalCD, rope;
@@ -35,7 +34,22 @@ public class Player : MonoBehaviour
                 hitbox.punch = false;
             }
             StartCoroutine(Stop());
-        } 
+        }
+        else if ((Input.GetButtonDown("Jump") && isMouse))
+        {
+            hitbox.punch = true;
+            IEnumerator Stop()
+            {
+                yield return new WaitForSeconds(0.05f);
+                hitbox.punch = false;
+            }
+            StartCoroutine(Stop());
+        }
+        if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        {
+            isMouse = true;
+        }
+        mousePos = Input.mousePosition;
         if (!holdRope && Input.GetButtonDown("Grab"))
         {
             grabbing = true;
@@ -52,26 +66,9 @@ public class Player : MonoBehaviour
             Destroy(rope);
             holdRope = false;
         }
-        if (holdRope)
+        if (holdRope) {
             rb.MovePosition(rope.transform.position);
-
-
         }
-        else if ((Input.GetButtonDown("Jump") && isMouse))
-        {
-            hitbox.punch = true;
-            IEnumerator Stop()
-            {
-                yield return new WaitForSeconds(0.05f);
-                hitbox.punch = false;
-            }
-            StartCoroutine(Stop());
-        }
-        if(Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
-        {
-            isMouse = true;
-        }
-        mousePos = Input.mousePosition;
     }
     private void FixedUpdate()
     {
