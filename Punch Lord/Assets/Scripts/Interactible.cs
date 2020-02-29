@@ -7,23 +7,17 @@ public class Interactible : MonoBehaviour
     public float idleSpeed;
     public float lives;
     public float bounceability;
-    //public Player player;
+    public Player player;
+    public bool respawnable;
+    public float timeBeforeRespawn;
+    public float initialLives;
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-       
+        initialLives = lives;
     }
 
-    /*
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (player.isAttacking())
-        {
-            lives--;
-        }
-    }
-    */
 
     private void FixedUpdate()
     {
@@ -33,9 +27,22 @@ public class Interactible : MonoBehaviour
         }
     }
 
-    void DisableInstance()
+    public void DisableInstance()
     {
         // Removes this script instance from the game object
-        this.enabled = false;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        if (respawnable)
+        {
+            StartCoroutine(RespawnCoroutine());
+        }
+    }
+
+    IEnumerator RespawnCoroutine()
+    {
+        yield return new WaitForSeconds(timeBeforeRespawn);
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        yield return null;
     }
 }

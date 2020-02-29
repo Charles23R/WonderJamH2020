@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  tags:
   - Interactible
+  - Button
+  - Vent
   layers:
   - Default
   - TransparentFX

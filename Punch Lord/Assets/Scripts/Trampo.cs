@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Trampo : MonoBehaviour
 {
+
+    public float bouncy;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,11 @@ public class Trampo : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.gameObject.GetComponent<Player>().Jump(new Vector2(0, bouncy));
+        this.gameObject.GetComponent<Interactible>().DisableInstance();
     }
 }
