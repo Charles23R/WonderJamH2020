@@ -314,10 +314,12 @@ MonoBehaviour:
   speed: 1000
   divider: 1.02
   launchSpeed: 30
+  dashSpeed: 750
   canJump: 1
   grounded: 1
   holdRope: 0
   grabbing: 0
+  dashUsed: 0
   hitbox: {fileID: 4901910822836260470}
   isMouse: 0
   portalCD: {fileID: 0}
