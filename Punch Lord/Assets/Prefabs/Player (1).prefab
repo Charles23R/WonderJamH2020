@@ -163,7 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a52e14c0293eb48a93d52a284bab14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShaking: 0
   punch: 0
+  cinecam: {fileID: 0}
+  perlin: {fileID: 0}
+  amplitude: 0.3
+  frequency: 2
 --- !u!1 &4901910823979236553
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,11 +315,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5c67245f68dbe4dbfb0455b32b9b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   speed: 1000
   divider: 1.02
   canJump: 1
   grounded: 1
+  tpCD: 0
   hitbox: {fileID: 4901910822836260470}
+  portalCD: {fileID: 0}
+  isMouse: 0
 --- !u!95 &4901910823979236402
 Animator:
   serializedVersion: 3

@@ -9,6 +9,7 @@ TagManager:
   - Button
   - Vent
   - TimeZone
+  - confinor
   layers:
   - Default
   - TransparentFX
