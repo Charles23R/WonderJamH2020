@@ -25,6 +25,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0))
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+
             isMouse = false;
             hitbox.punch = true;
             IEnumerator Stop()
@@ -36,6 +45,15 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+           
             hitbox.punch = true;
             IEnumerator Stop()
             {
