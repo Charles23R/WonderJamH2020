@@ -34,6 +34,16 @@ public class Arm : MonoBehaviour
         if (punch)
         {
             GetComponentInParent<Player>().Jump();
+            if (collision.gameObject.CompareTag("Interactible"))
+            {
+                collision.gameObject.GetComponent<Interactible>().lives--;
+                
+            }
+            if (collision.gameObject.CompareTag("Button"))
+            {
+                collision.gameObject.GetComponent<ButtonDisable>().onAction();
+                collision.gameObject.GetComponent<Interactible>().lives--;
+            }
             punch = false;
         }
     }

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trampo : MonoBehaviour
+public class Spikes : MonoBehaviour
 {
-
-    public float bouncy;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +18,9 @@ public class Trampo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Player>().Jump(new Vector2(0, bouncy));
-        this.gameObject.GetComponent<Interactible>().DisableInstance();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().onDeath();
+        }
     }
 }
