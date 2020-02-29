@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class goblinIntro : MonoBehaviour
 {
@@ -30,11 +31,22 @@ public class goblinIntro : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator FadeOut()
+    {
+        float alpha = 0;
+        while (alpha < 1)
+        {
+            alpha += 0.01f;
+            black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+        yield return null;
+    }
+
     IEnumerator GoblinEscape()
     {
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(FadeIn());
-        black.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         goblin.GetComponent<SpriteRenderer>().flipX = true;
         yield return new WaitForSeconds(0.5f);
@@ -69,6 +81,19 @@ public class goblinIntro : MonoBehaviour
         textbox2.SetActive(false);
         yield return null;
     }
+
+    IEnumerator EndFirstRoomCoroutine()
+    {
+        yield return StartCoroutine(FadeOut());
+        SceneManager.LoadScene(4);
+        yield return null;
+    }
+
+    public void EndFirstRoom()
+    {
+        StartCoroutine(EndFirstRoomCoroutine());
+    }
+
 
     // Update is called once per frame
     void Update()
