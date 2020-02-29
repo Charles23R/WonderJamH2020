@@ -31,10 +31,12 @@ public class IdleMove : MonoBehaviour
         if (!reversed)
         {
             transform.Translate((new Vector3(translateX / 5, translateY / 5, 0))*Time.deltaTime*moveTime);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         if (reversed)
         {
             transform.Translate((new Vector3(-translateX / 5, -translateY / 5, 0)) * Time.deltaTime*moveTime);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 
