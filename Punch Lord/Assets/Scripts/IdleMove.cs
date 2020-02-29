@@ -5,19 +5,37 @@ using UnityEngine;
 public class IdleMove : MonoBehaviour
 {
 
-    public int translateX, translateY;
+    public float translateX, translateY;
     public Interactible inter;
     public float moveTime;
+    private bool reversed;
+    private Vector3 posInit;
     // Start is called before the first frame update
     void Start()
     {
         //StartMove();
+        posInit = transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(transform.position + new Vector3(translateX, translateY, 0) * moveTime * Time.deltaTime);
+        if (transform.position.x <= posInit.x && transform.position.y <= posInit.y)
+        {
+            reversed = false;
+        }
+        if (transform.position.x >= posInit.x+translateX && transform.position.y >= posInit.y+translateY)
+        {
+            reversed = true;
+        }
+        if (!reversed)
+        {
+            transform.Translate((new Vector3(translateX / 5, translateY / 5, 0))*Time.deltaTime*moveTime);
+        }
+        if (reversed)
+        {
+            transform.Translate((new Vector3(-translateX / 5, -translateY / 5, 0)) * Time.deltaTime*moveTime);
+        }
     }
 
     /*
