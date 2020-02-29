@@ -37,11 +37,13 @@ public class Player : MonoBehaviour
         if (rb.velocity.y>0)
             rb.velocity = new Vector2(rb.velocity.x / divider, rb.velocity.y / divider);
         else
-            rb.velocity = new Vector2(rb.velocity.x / divider, rb.velocity.y * divider);
+            rb.velocity = new Vector2(rb.velocity.x / divider , rb.velocity.y * divider);
     }
 
     public void Jump()
     {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
         grounded = false;
         Vector2 aim = new Vector2(-Input.GetAxisRaw("Horizontal"), -Input.GetAxisRaw("Vertical"));
         rb.velocity = Vector2.zero;
