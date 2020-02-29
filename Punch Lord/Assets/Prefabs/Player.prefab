@@ -313,9 +313,14 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 1800
   divider: 1.02
+  launchSpeed: 25
   canJump: 1
   grounded: 1
+  holdRope: 0
+  grabbing: 0
   hitbox: {fileID: 2913253231922265001}
+  portalCD: {fileID: 0}
+  rope: {fileID: 0}
 --- !u!95 &2913253232926837229
 Animator:
   serializedVersion: 3
