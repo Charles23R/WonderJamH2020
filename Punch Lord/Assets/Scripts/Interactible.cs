@@ -26,6 +26,10 @@ public class Interactible : MonoBehaviour
             DisableInstance();
         }
     }
+    public bool IsAlive()
+    {
+        return lives > 0; 
+    }
 
     public void DisableInstance()
     {
