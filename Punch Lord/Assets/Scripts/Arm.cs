@@ -38,6 +38,13 @@ public class Arm : MonoBehaviour
             Vector2 aim = new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y);
             float angle = Mathf.Atan2(-aim.y, -aim.x) * Mathf.Rad2Deg; ;
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
+            if(angle + 180 < 90 || angle + 180 > 240){
+                GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
         if (Input.GetButtonDown("Jump"))
         {
