@@ -58,13 +58,10 @@ public class changeLevel : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.GetComponent<Rigidbody2D>().velocity.y > minYSpeed)
-            {
                 ktot = FindObjectOfType<keeptrackofthings>();
                 ktot.saveVelocity();
                 Destroy(GameObject.FindGameObjectWithTag("Player"));
                 StartCoroutine(ChangeLevel());
-            }
         }
     }
 

@@ -50,9 +50,11 @@ public class Arm : MonoBehaviour
 
     IEnumerator ScreenShake()
     {
+        isShaking = true;
         perlin.m_AmplitudeGain = amplitude;
         perlin.m_FrequencyGain = frequency;
         yield return new WaitForSeconds(0.2f);
+        isShaking = false;
         perlin.m_FrequencyGain = 0;
         perlin.m_AmplitudeGain = 0;
         yield return null;
@@ -65,7 +67,7 @@ public class Arm : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone"))
+        if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone") && !isShaking)
         {
             StartCoroutine(ScreenShake());
         }

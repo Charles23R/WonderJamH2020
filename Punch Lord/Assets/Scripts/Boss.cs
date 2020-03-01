@@ -11,9 +11,15 @@ public class Boss : MonoBehaviour
     Vector2 startPos;
     public Transform transform;
     bool reverse = false;
+    public int lives;
+    public int initialLives;
+    public SpriteRenderer spriteRenderer;
+    public
+
     // Start is called before the first frame update
     void Start()
     {
+        initialLives = lives;
         startPos = transform.position;
         startTime = Time.time;
     }
@@ -25,15 +31,37 @@ public class Boss : MonoBehaviour
         if (time <= cycle*(2*Mathf.PI/frequence))
         {
             if (!reverse)
+            {
                 rb.MovePosition(new Vector2(startPos.x + time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
+                spriteRenderer.flipX = true;
+            }
             else if (reverse)
+            {
                 rb.MovePosition(new Vector2(startPos.x - time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
+                spriteRenderer.flipX = false;
+            }  
         }
         else
         {
             reverse = !reverse;
             startTime = Time.time;
-            startPos = transform.position;
         }
+        startPos = transform.position;
+        if (!IsAlive())
+        {
+            this.gameObject.GetComponent<Animator>().SetTrigger("Die");
+        }
+    }
+
+    public bool IsAlive()
+    {
+        return (lives > 0);
+    }
+
+    public void DisableInstance()
+    {
+        // Removes this script instance from the game object
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 }
