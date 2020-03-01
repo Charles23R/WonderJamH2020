@@ -80,7 +80,6 @@ public class Arm : MonoBehaviour
             if (collision.gameObject.CompareTag("Button"))
             {
                 collision.gameObject.GetComponent<ButtonDisable>().onAction();
-                collision.gameObject.GetComponent<Interactible>().lives--;
             }
             punch = false;
         }
