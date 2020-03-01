@@ -11,6 +11,10 @@ public class keeptrackofthings : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        if (FindObjectsOfType<keeptrackofthings>().Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void saveVelocity()

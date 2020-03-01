@@ -25,6 +25,7 @@ public class scriptAventuredebut : MonoBehaviour
         player.GetComponent<Player>().canJump = false;
         yield return StartCoroutine(FadeIn());
         player.GetComponent<Player>().Jump(new Vector2(0.4f, 0.4f));
+        yield return new WaitForSeconds(0.5f);
         player.GetComponent<Player>().canJump = true;
         murinvis.SetActive(true);
         yield return null;

@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spawnPos = this.transform.position;
+        spawnPos = GameObject.Find("Respawn").transform.position;
     }
 
     // Update is called once per frame
