@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: e0f9fd4b376a72549b5fccf9d31d13fd
   - enabled: 1
-    path: Assets/Scenes/Scene Intro.unity
+    path: Assets/Scenes/Story/Tutorial/Scene Intro.unity
     guid: 3d58156b728e16747a99b101bfdff982
   - enabled: 1
     path: Assets/Scenes/Falling.unity
@@ -45,6 +45,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Story/Credit.unity
     guid: f2da1225df2df32469d5188f832d01ce
   - enabled: 1
-    path: Assets/Scenes/Story/Bonus Levels/Bonus Level1.unity
+    path: Assets/Scenes/Story/Bonus Levels/Sewer6.unity
+    guid: 59aa72d64ff882b4d95fe10452f547d8
+  - enabled: 1
+    path: Assets/Scenes/Story/Bonus Levels/Sewer7.unity
+    guid: 497741f73cd3d5f4099ef82764494ef1
+  - enabled: 1
+    path: Assets/Scenes/Story/Bonus Levels/Sewer8.unity
+    guid: a3ec438d719eb464f940dca841f5b329
+  - enabled: 1
+    path: Assets/Scenes/Story/Bonus Levels/Sewer9.unity
+    guid: 055ce217c0fae9643be9f48dfd2aadce
+  - enabled: 1
+    path: Assets/Scenes/Story/Bonus Levels/Sewer10.unity
+    guid: e7eb32e005f200c459a14bd7fb05caca
+  - enabled: 1
+    path: Assets/Scenes/Story/Bonus Levels/Level1000.unity
     guid: 670c731ed29d10644ab918921a7158a7
   m_configObjects: {}
