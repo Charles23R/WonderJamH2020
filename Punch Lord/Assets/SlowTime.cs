@@ -11,4 +11,8 @@ public class SlowTime : MonoBehaviour
         Time.timeScale = timeFactor;
         // Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Time.timeScale = 1f;
+    }
 }
