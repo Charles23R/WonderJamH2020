@@ -635,6 +635,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8409154656186299021, guid: ca993e18602fe3a48b26a5cc95b4c97e,
+        type: 3}
+      propertyPath: Speed
+      value: 0.575
+      objectReference: {fileID: 0}
     - target: {fileID: 8441658382189955180, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_Name
@@ -698,12 +703,12 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
@@ -723,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_text
-      value: Sewers BOSS
+      value: "Sewers \nBOSS"
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}

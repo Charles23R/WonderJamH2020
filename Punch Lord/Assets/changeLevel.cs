@@ -38,7 +38,7 @@ public class changeLevel : MonoBehaviour
         if (black != null)
         {
             float alpha = 0;
-            while (alpha < 1)
+            while (alpha < 1 && black != null)
             {
                 alpha += 0.05f;
                 black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);

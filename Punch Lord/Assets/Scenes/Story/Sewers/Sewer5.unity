@@ -36539,12 +36539,12 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
@@ -36564,7 +36564,7 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_text
-      value: Sewers 1-3
+      value: "Sewers \n1-3"
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}

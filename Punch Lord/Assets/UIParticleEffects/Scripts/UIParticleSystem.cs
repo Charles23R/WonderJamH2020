@@ -174,7 +174,7 @@ public class UIParticleSystem : MonoBehaviour {
             gravityForce = Vector3.up * Gravity * particleLifetime;
 
             //set position
-            particle.transform.position += emissonAngle * SpeedOverLifetime.Evaluate(particleLifetime / Lifetime) * Speed + gravityForce;
+            particle.transform.position += Time.deltaTime * emissonAngle * SpeedOverLifetime.Evaluate(particleLifetime / Lifetime) * Speed + gravityForce;
 
             //set scale
             particle.transform.localScale = Vector3.one * SizeOverLifetime.Evaluate(particleLifetime / Lifetime) * Size;

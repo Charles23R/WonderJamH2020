@@ -655,7 +655,7 @@ PrefabInstance:
     - target: {fileID: 2469419075467117314, guid: e2dfb3afac8e2d9478df0abc4351e4bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.52
+      value: -9.98
       objectReference: {fileID: 0}
     - target: {fileID: 2469419075467117314, guid: e2dfb3afac8e2d9478df0abc4351e4bf,
         type: 3}
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 535310651}
   m_Layer: 5
   m_Name: Black
-  m_TagString: Untagged
+  m_TagString: Black
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1332,7 +1332,7 @@ GameObject:
   - component: {fileID: 898173438}
   m_Layer: 0
   m_Name: PlayerInfoPersistent
-  m_TagString: Black
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1351,6 +1351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
   black: {fileID: 0}
+  musicTuto: {fileID: 0}
+  musicSewers: {fileID: 0}
 --- !u!4 &898173439
 Transform:
   m_ObjectHideFlags: 0
@@ -2106,7 +2108,7 @@ PrefabInstance:
     - target: {fileID: 1099771415054124023, guid: fff64f7799019f54fad5733957fa5bb1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.52
+      value: -9.98
       objectReference: {fileID: 0}
     - target: {fileID: 1099771415054124023, guid: fff64f7799019f54fad5733957fa5bb1,
         type: 3}
@@ -2141,7 +2143,7 @@ PrefabInstance:
     - target: {fileID: 1099771415054124023, guid: fff64f7799019f54fad5733957fa5bb1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1099771415054124023, guid: fff64f7799019f54fad5733957fa5bb1,
         type: 3}
@@ -2254,6 +2256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8409154656186299021, guid: ca993e18602fe3a48b26a5cc95b4c97e,
+        type: 3}
+      propertyPath: Speed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 8441658382189955180, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_Name
@@ -2322,7 +2329,7 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
@@ -2342,12 +2349,14 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_text
-      value: Tutorial 0-1
+      value: 'Tutorial
+
+        0-1'
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_fontSize
-      value: 59.05
+      value: 50.7
       objectReference: {fileID: 0}
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
@@ -2377,6 +2386,11 @@ PrefabInstance:
     - target: {fileID: 8441658382296679860, guid: ca993e18602fe3a48b26a5cc95b4c97e,
         type: 3}
       propertyPath: m_fontColorGradient.topRight.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441658382930367405, guid: ca993e18602fe3a48b26a5cc95b4c97e,
+        type: 3}
+      propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
