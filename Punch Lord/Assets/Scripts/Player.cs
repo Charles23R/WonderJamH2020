@@ -27,18 +27,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
-            if (rageBarActive)
-            {
-                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
-                }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-                }
-            }
-            
+            checkRage();
 
             isMouse = false;
             hitbox.punch = true;
@@ -51,17 +40,7 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
-            if (rageBarActive)
-            {
-                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
-                }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-                }
-            }
+            checkRage();
 
             hitbox.punch = true;
             IEnumerator Stop()
@@ -71,11 +50,20 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(Stop());
         }
-        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded && !isMouse)
         {
+            checkRage();
             dashUsed = true;
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashSpeed);
+        }
+        else if(!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        {
+            checkRage();
+            dashUsed = true;
+            rb.velocity = Vector2.zero;
+            var pos = Camera.main.WorldToScreenPoint(transform.position);
+            rb.AddForce(new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y).normalized * dashSpeed);
         }
         if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -84,6 +72,7 @@ public class Player : MonoBehaviour
         mousePos = Input.mousePosition;
         if (!holdRope && Input.GetButtonDown("Grab"))
         {
+            checkRage();
             grabbing = true;
             IEnumerator Stop()
             {
@@ -94,6 +83,7 @@ public class Player : MonoBehaviour
         }
         if(holdRope && Input.GetButtonDown("Grab"))
         {
+            checkRage();
             RotationThing rt = rope.transform.parent.GetComponentInParent<RotationThing>();
             rb.velocity = rope.transform.right * rt.launchSpeed * rt.cosAnswer * (Vector2.Distance(rope.transform.parent.parent.position,rope.transform.position)/rt.maxDistance);
             Destroy(rope);
@@ -166,6 +156,19 @@ public class Player : MonoBehaviour
         this.transform.position = spawnPos;
     }
 
-
+    public void checkRage()
+    {
+        if (rageBarActive)
+        {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+        }
+    }
 
 }
