@@ -63,6 +63,7 @@ public class goblinIntro : MonoBehaviour
 
     IEnumerator Beginning()
     {
+        realPlayer.transform.Find("HitBox").GetComponent<Arm>().canPunch = false;
         yield return new WaitForSeconds(1f);
         textbox2.SetActive(true);
         player.SetActive(false);
@@ -88,6 +89,7 @@ public class goblinIntro : MonoBehaviour
         }
         textbox4.SetActive(false);
         yield return new WaitForSeconds(1f);
+        realPlayer.transform.Find("HitBox").GetComponent<Arm>().canPunch = true;
         yield return null;
     }
 

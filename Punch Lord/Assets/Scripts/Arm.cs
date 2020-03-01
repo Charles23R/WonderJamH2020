@@ -10,6 +10,7 @@ public class Arm : MonoBehaviour
     public bool isShaking;
     public bool isPunching;
     public bool isEmitting;
+    public bool canPunch;
     public bool punch;
     public CinemachineVirtualCamera cinecam;
     public CinemachineBasicMultiChannelPerlin perlin;
@@ -46,7 +47,8 @@ public class Arm : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX = false;
             }
         }
-        if (Input.GetButtonDown("Jump"))
+
+        if (Input.GetButtonDown("Jump") && canPunch)
         {
             StartCoroutine(Punch());
         }

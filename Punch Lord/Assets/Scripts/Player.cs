@@ -188,6 +188,11 @@ public class Player : MonoBehaviour
         for (int i = 0; i < ButtonstoReEnable.Length; i++)
         {
             ButtonstoReEnable[i].GetComponent<ButtonDisable>().Reset();
+            for (int j = 0; j < ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable.Length; j++)
+            {
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<Collider2D>().enabled = true;
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
         this.transform.position = spawnPos;
     }

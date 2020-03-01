@@ -375,6 +375,7 @@ MonoBehaviour:
   isShaking: 0
   isPunching: 0
   isEmitting: 0
+  canPunch: 1
   punch: 0
   cinecam: {fileID: 0}
   perlin: {fileID: 0}
