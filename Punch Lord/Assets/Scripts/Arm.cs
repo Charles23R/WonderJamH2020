@@ -5,7 +5,12 @@ using Cinemachine;
 
 public class Arm : MonoBehaviour
 {
+    public ParticleSystem particles;
+    public ParticleSystem particles2;
     public bool isShaking;
+    public bool isPunching;
+    public bool isEmitting;
+    public bool canPunch;
     public bool punch;
     public CinemachineVirtualCamera cinecam;
     public CinemachineBasicMultiChannelPerlin perlin;
@@ -34,8 +39,19 @@ public class Arm : MonoBehaviour
             Vector2 aim = new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y);
             float angle = Mathf.Atan2(-aim.y, -aim.x) * Mathf.Rad2Deg; ;
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
+            if(angle + 180 < 90 || angle + 180 > 240){
+                GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
 
+        if (Input.GetButtonDown("Jump") && canPunch)
+        {
+            StartCoroutine(Punch());
+        }
     }
 
     private void FixedUpdate()
@@ -46,6 +62,13 @@ public class Arm : MonoBehaviour
     private void OnEnable()
     {
         
+    }
+
+    IEnumerator Punch()
+    {
+        isPunching = true;
+        yield return new WaitForSeconds(0.3f);
+        isPunching = false;
     }
 
     IEnumerator ScreenShake()
@@ -60,13 +83,28 @@ public class Arm : MonoBehaviour
         yield return null;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator Particles()
     {
-        
-    } 
+        isEmitting = true;
+        particles.Play();
+        particles2.Play();
+        yield return new WaitForSeconds(0.2f);
+        isEmitting = false;
+        yield return null;
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (!collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone") && isPunching && !isEmitting)
+        {
+            StartCoroutine(Particles());
+        }
+        
+        if (collision.gameObject.tag == "Button" && isPunching)
+        {
+            collision.gameObject.GetComponent<ButtonDisable>().onAction();
+        }
+
         if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone") && !isShaking)
         {
             StartCoroutine(ScreenShake());
@@ -78,10 +116,6 @@ public class Arm : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Interactible>().lives--;
                 
-            }
-            if (collision.gameObject.CompareTag("Button"))
-            {
-                collision.gameObject.GetComponent<ButtonDisable>().onAction();
             }
             punch = false;
         }

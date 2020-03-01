@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public GameObject portalCD, rope;
     public Poing poing;
     public bool rageBarActive;
+    public GameObject trail;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,14 @@ public class Player : MonoBehaviour
         slowDash = dashSpeed / 1.5f;
         rb = GetComponent<Rigidbody2D>();
         spawnPos = GameObject.Find("Respawn").transform.position;
+    }
+
+    IEnumerator DashTrail()
+    {
+        trail.GetComponent<TrailRenderer>().emitting = true;
+        yield return new WaitForSeconds(0.5f);
+        trail.GetComponent<TrailRenderer>().emitting = false;
+        yield return null;
     }
 
     // Update is called once per frame
@@ -82,6 +91,7 @@ public class Player : MonoBehaviour
             rb.velocity = Vector2.zero;
             var pos = Camera.main.WorldToScreenPoint(transform.position);
             rb.AddForce(new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y).normalized * dashSpeed);
+            StartCoroutine(DashTrail());
         }
         if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -136,7 +146,7 @@ public class Player : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         rb.AddForce(aim.normalized * speed);
-        // poing.onPunch();
+        poing.onPunch();
     }
     public void Jump(Vector2 aim)
     {
@@ -178,6 +188,11 @@ public class Player : MonoBehaviour
         for (int i = 0; i < ButtonstoReEnable.Length; i++)
         {
             ButtonstoReEnable[i].GetComponent<ButtonDisable>().Reset();
+            for (int j = 0; j < ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable.Length; j++)
+            {
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<Collider2D>().enabled = true;
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
         this.transform.position = spawnPos;
     }

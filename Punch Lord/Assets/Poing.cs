@@ -1,40 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
 public class Poing : MonoBehaviour
 {
-    
-    public GameObject main;
-    public Vector3 target;
     public float speed;
-    public Sprite spriteNeutral;
     public Animator animator;
-
+    public Vector3 start;
 
     public void onPunch()
     {
-        animator.SetBool("isAttacking", true);
-        StartCoroutine(animPoing());
+        StopCoroutine(Stop());
+        animator.Play("poingStill");
+        animator.Play("frapper");
+        StartCoroutine(Stop());
 
     }
 
-    IEnumerator animPoing()
-    {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target, step);
+    IEnumerator Stop()
+    {  
+        while (gameObject.transform.position != GameObject.Find("TargetDoigt").transform.position)
+        {
+            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, GameObject.Find("TargetDoigt").transform.position, speed);
+        }
+        yield return new WaitForSeconds(0.5009f);
+
+        gameObject.transform.position = GameObject.Find("TargetPoing").transform.position;
         yield return null;
     }
 
     private void Update()
     {
-        target = main.transform.position;
-    }
 
-    public void StopAnim()
-    {
-        StopCoroutine(animPoing());
-        animator.SetBool("isAttacking", false);
     }
-    
 }

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleSpeed: 0
   lives: 1
-  bounceability: 4
+  bounceability: 1
   player: {fileID: 0}
   respawnable: 1
   timeBeforeRespawn: 5
