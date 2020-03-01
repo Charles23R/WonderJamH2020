@@ -95,6 +95,11 @@ public class Arm : MonoBehaviour
         yield return null;
     }
 
+    public void startCoroutineParticle()
+    {
+        StartCoroutine(Particles());
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone") && isPunching && !isEmitting)

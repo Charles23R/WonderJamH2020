@@ -16,6 +16,11 @@ public class menuScript : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void startBonusGame()
+    {
+        SceneManager.LoadScene(13);
+    }
+
     public void quitGame()
     {
         Application.Quit();
