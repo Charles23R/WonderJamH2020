@@ -112,6 +112,11 @@ public class Arm : MonoBehaviour
             collision.gameObject.GetComponent<ButtonDisable>().onAction();
         }
 
+        if (collision.gameObject.tag == "ButtonE" && isPunching)
+        {
+            collision.gameObject.GetComponent<ButtonEnable>().onAction();
+        }
+
         if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone") && !isShaking)
         {
             StartCoroutine(ScreenShake());

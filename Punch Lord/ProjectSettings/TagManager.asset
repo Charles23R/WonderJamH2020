@@ -15,6 +15,7 @@ TagManager:
   - Boss
   - Black
   - Poing
+  - ButtonE
   layers:
   - Default
   - TransparentFX

@@ -536,6 +536,11 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2645289590263867082, guid: 6591d8574587c1b4da981ab230da4508,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2645289590263867083, guid: 6591d8574587c1b4da981ab230da4508,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -9131,6 +9136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
   black: {fileID: 0}
+  musicTuto: {fileID: 0}
+  musicSewers: {fileID: 0}
 --- !u!4 &1317967324
 Transform:
   m_ObjectHideFlags: 0
@@ -9313,7 +9320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367832621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2252889, y: 18.996761, z: -9}
+  m_LocalPosition: {x: -2.3302665, y: 18.996761, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

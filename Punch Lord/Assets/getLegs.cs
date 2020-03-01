@@ -43,6 +43,7 @@ public class getLegs : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = false;
         yield return new WaitForSecondsRealtime(3.5f);
         Time.timeScale = 1f;
+        Destroy(FindObjectOfType<keeptrackofthings>().gameObject);
         SceneManager.LoadScene(12);
         yield return null;
     }
