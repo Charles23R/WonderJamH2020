@@ -31,7 +31,7 @@ public class Trampo : MonoBehaviour
             animator.Play("New State");
             animator.Play("interact");
             StartCoroutine(Stop());
-            collision.gameObject.GetComponent<Player>().Jump(new Vector2(0, bouncy));
+            collision.gameObject.GetComponent<Player>().Jump(transform.up*bouncy);
         }
 
     }
