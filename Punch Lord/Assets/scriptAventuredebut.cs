@@ -10,6 +10,7 @@ public class scriptAventuredebut : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        black = GameObject.FindGameObjectWithTag("Black");
         float alpha = 1;
         while (alpha > 0)
         {
@@ -33,6 +34,7 @@ public class scriptAventuredebut : MonoBehaviour
 
     void Start()
     {
+        black = GameObject.FindGameObjectWithTag("Black");
         StartCoroutine(beginAdventure());
     }
 

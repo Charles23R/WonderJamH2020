@@ -15,6 +15,7 @@ public class Arm : MonoBehaviour
     public CinemachineVirtualCamera cinecam;
     public CinemachineBasicMultiChannelPerlin perlin;
     public float amplitude, frequency;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +65,7 @@ public class Arm : MonoBehaviour
         
     }
 
-    IEnumerator Punch()
+    public IEnumerator Punch()
     {
         isPunching = true;
         yield return new WaitForSeconds(0.3f);
@@ -85,12 +86,18 @@ public class Arm : MonoBehaviour
 
     IEnumerator Particles()
     {
+        audioSource.Play();
         isEmitting = true;
         particles.Play();
         particles2.Play();
         yield return new WaitForSeconds(0.2f);
         isEmitting = false;
         yield return null;
+    }
+
+    public void startCoroutineParticle()
+    {
+        StartCoroutine(Particles());
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -116,6 +123,10 @@ public class Arm : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Interactible>().lives--;
                 
+            }
+            else if (collision.gameObject.CompareTag("Boss"))
+            {
+                collision.gameObject.GetComponent<Boss>().lives--;
             }
             punch = false;
         }

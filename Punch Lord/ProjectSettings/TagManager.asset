@@ -12,6 +12,9 @@ TagManager:
   - RageBar
   - confinor
   - zoneText
+  - Boss
+  - Black
+  - Poing
   layers:
   - Default
   - TransparentFX

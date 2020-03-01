@@ -15,6 +15,7 @@ public class collapse : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameObject.Find("GameManager").GetComponent<introSection>().StartCollapse();
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 

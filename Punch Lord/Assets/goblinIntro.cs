@@ -69,6 +69,7 @@ public class goblinIntro : MonoBehaviour
         player.SetActive(false);
         realPlayer.SetActive(true);
         realPlayer.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
+        realPlayer.transform.Find("HitBox").GetComponent<Arm>().canPunch = true;
         while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
         {
             yield return null;
@@ -89,7 +90,6 @@ public class goblinIntro : MonoBehaviour
         }
         textbox4.SetActive(false);
         yield return new WaitForSeconds(1f);
-        realPlayer.transform.Find("HitBox").GetComponent<Arm>().canPunch = true;
         yield return null;
     }
 

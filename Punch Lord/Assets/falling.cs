@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class falling : MonoBehaviour
 {
+    public AudioClip fall;
+    public AudioClip touchGround;
     public GameObject black;
     public GameObject desiredPosition;
     public GameObject player;
@@ -13,6 +15,7 @@ public class falling : MonoBehaviour
     IEnumerator Falling()
     {
         yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<AudioSource>().Play();
         black.SetActive(false);
         while (player.transform.position.y > desiredPosition.transform.position.y)
         {
@@ -21,7 +24,9 @@ public class falling : MonoBehaviour
             yield return null;
         }
         black.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<AudioSource>().clip = touchGround;
+        gameObject.GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(3);
         yield return null;
     }

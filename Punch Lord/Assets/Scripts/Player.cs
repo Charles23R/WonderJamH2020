@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
             dashUsed = true;
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashSpeed);
+            StartCoroutine(DashTrail());
         }
         else if(!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
         {
@@ -177,6 +178,7 @@ public class Player : MonoBehaviour
     public void onDeath()
     {
         GameObject[] toReEnable = GameObject.FindGameObjectsWithTag("Interactible");
+        GameObject[] toReEnableBoss = GameObject.FindGameObjectsWithTag("Boss");
         GameObject[] ButtonstoReEnable = GameObject.FindGameObjectsWithTag("Button");
         for (int i = 0; i< toReEnable.Length; i++)
         {
@@ -184,6 +186,11 @@ public class Player : MonoBehaviour
             toReEnable[i].SetActive(true);
             toReEnable[i].GetComponent<Collider2D>().enabled = true;
             toReEnable[i].GetComponent<SpriteRenderer>().enabled = true;
+        }
+        for (int i = 0; i < toReEnableBoss.Length; i++)
+        {
+            toReEnableBoss[i].GetComponent<Boss>().lives = toReEnableBoss[i].GetComponent<Boss>().initialLives;
+            toReEnableBoss[i].SetActive(true);
         }
         for (int i = 0; i < ButtonstoReEnable.Length; i++)
         {
