@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public bool isMouse;
     Vector3 mousePos;
     public GameObject portalCD, rope;
+    public bool rageBarActive;
 
 
     // Start is called before the first frame update
@@ -26,14 +27,18 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
-            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            if (rageBarActive)
             {
-                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+                {
+                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+                }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+                }
             }
-            else
-            {
-                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-            }
+            
 
             isMouse = false;
             hitbox.punch = true;
@@ -46,15 +51,18 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
-            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            if (rageBarActive)
             {
-                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+                {
+                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+                }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+                }
             }
-            else
-            {
-                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-            }
-           
+
             hitbox.punch = true;
             IEnumerator Stop()
             {
