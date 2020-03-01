@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5423523255384853310}
   m_Layer: 9
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Poing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
