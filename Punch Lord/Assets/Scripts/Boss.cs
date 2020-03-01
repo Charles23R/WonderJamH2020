@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    public GameObject bosded, bosnotded;
     public Rigidbody2D rb;
     float startTime, time;
     public float speed,amp,frequence;
@@ -27,29 +28,37 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        time = Time.time - startTime;
-        if (time <= cycle*(2*Mathf.PI/frequence))
+        if (IsAlive())
         {
-            if (!reverse)
+            time = Time.time - startTime;
+            if (time <= cycle*(2*Mathf.PI/frequence))
             {
-                rb.MovePosition(new Vector2(startPos.x + time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
-                spriteRenderer.flipX = true;
+                if (!reverse)
+                {
+                    rb.MovePosition(new Vector2(startPos.x + time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
+                    spriteRenderer.flipX = true;
+                }
+                else if (reverse)
+                {
+                    rb.MovePosition(new Vector2(startPos.x - time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
+                    spriteRenderer.flipX = false;
+                }  
             }
-            else if (reverse)
+            else
             {
-                rb.MovePosition(new Vector2(startPos.x - time * speed, startPos.y + amp * Mathf.Sin(frequence * time)));
-                spriteRenderer.flipX = false;
-            }  
+                reverse = !reverse;
+                startTime = Time.time;
+                startPos = transform.position;
+            }
         }
+ 
         else
         {
-            reverse = !reverse;
-            startTime = Time.time;
-        }
-        startPos = transform.position;
-        if (!IsAlive())
-        {
             this.gameObject.GetComponent<Animator>().SetTrigger("Die");
+            GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.Find("TpPos").transform.position;
+            bosded.SetActive(true);
+            bosnotded.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

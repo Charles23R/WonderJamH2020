@@ -117,6 +117,10 @@ public class Arm : MonoBehaviour
                 collision.gameObject.GetComponent<Interactible>().lives--;
                 
             }
+            else if (collision.gameObject.CompareTag("Boss"))
+            {
+                collision.gameObject.GetComponent<Boss>().lives--;
+            }
             punch = false;
         }
     }

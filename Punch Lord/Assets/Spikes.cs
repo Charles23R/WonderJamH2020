@@ -21,6 +21,7 @@ public class Spikes : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player>().onDeath();
+            Debug.Log("lolololo");
         }
     }
 }
