@@ -12,7 +12,7 @@ public class scriptAventuredebut : MonoBehaviour
     {
         black = GameObject.FindGameObjectWithTag("Black");
         float alpha = 1;
-        while (alpha > 0)
+        while (alpha > 0 && black != null)
         {
             alpha -= 0.01f;
             black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);
@@ -24,9 +24,11 @@ public class scriptAventuredebut : MonoBehaviour
     IEnumerator beginAdventure()
     {
         player.GetComponent<Player>().canJump = false;
+        player.GetComponent<Player>().enabled = false;
         yield return StartCoroutine(FadeIn());
-        player.GetComponent<Player>().Jump(new Vector2(0.4f, 0.4f));
+        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.3f * 1000, 0.3f * 1000));
         yield return new WaitForSeconds(0.5f);
+        player.GetComponent<Player>().enabled = true;
         player.GetComponent<Player>().canJump = true;
         murinvis.SetActive(true);
         yield return null;

@@ -61,7 +61,7 @@ MonoBehaviour:
   Duration: 5
   Looping: 1
   Lifetime: 1.2
-  Speed: 6
+  Speed: 150
   Size: 0.7
   Rotation: 0
   PlayOnAwake: 1

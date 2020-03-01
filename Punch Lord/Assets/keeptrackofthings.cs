@@ -7,6 +7,9 @@ public class keeptrackofthings : MonoBehaviour
 {
     public Vector2 velocity;
     public GameObject black;
+    public AudioClip musicTuto;
+    public AudioClip musicSewers;
+    float music;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,54 @@ public class keeptrackofthings : MonoBehaviour
         }
     }
 
+
+    public void StartTutorialMusic()
+    {
+        gameObject.GetComponent<AudioSource>().clip = musicTuto;
+        gameObject.GetComponent<AudioSource>().loop = true;
+        gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    IEnumerator StopMusic()
+    {
+        while (music > 0)
+        {
+            music -= 1f * Time.deltaTime;
+            gameObject.GetComponent<AudioSource>().volume = music;
+            yield return null;
+        }
+        music = 0;
+        yield return null;
+    }
+
+    IEnumerator StartMusic()
+    {
+        while (music < 1)
+        {
+            music += 1f * Time.deltaTime;
+            gameObject.GetComponent<AudioSource>().volume = music;
+            yield return null;
+        }
+        music = 1;
+        yield return null;
+    }
+
+    IEnumerator SewerMusic()
+    {
+        yield return StartCoroutine(StopMusic());
+        gameObject.GetComponent<AudioSource>().Stop();
+        gameObject.GetComponent<AudioSource>().clip = musicSewers;
+        gameObject.GetComponent<AudioSource>().loop = true;
+        gameObject.GetComponent<AudioSource>().Play();
+        yield return StartCoroutine(StartMusic());
+    }
+
+
+    public void StartSewerMusic()
+    {
+        StartCoroutine(SewerMusic());
+    }
+
     public void saveVelocity()
     {
         velocity = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity;
@@ -25,8 +76,9 @@ public class keeptrackofthings : MonoBehaviour
     IEnumerator FadeIn()
     {
         black = GameObject.FindGameObjectWithTag("Black");
+        
         float alpha = 1;
-        while (alpha > 0)
+        while (alpha > 0 && black != null)
         {
             alpha -= 0.05f;
             black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);

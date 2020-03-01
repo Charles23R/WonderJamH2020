@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/Story/Intro/Menu.unity
     guid: e0f9fd4b376a72549b5fccf9d31d13fd
   - enabled: 1
     path: Assets/Scenes/Scene Intro.unity
     guid: 3d58156b728e16747a99b101bfdff982
   - enabled: 1
-    path: Assets/Scenes/Falling.unity
+    path: Assets/Scenes/Story/Intro/Falling.unity
     guid: 1e4445dc8a9e9584b88414a1224df20f
   - enabled: 1
     path: Assets/Scenes/Story/Tutorial/FirstRoom.unity

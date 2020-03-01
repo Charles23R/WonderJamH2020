@@ -70,6 +70,7 @@ public class goblinIntro : MonoBehaviour
         realPlayer.SetActive(true);
         realPlayer.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100));
         realPlayer.transform.Find("HitBox").GetComponent<Arm>().canPunch = true;
+        FindObjectOfType<keeptrackofthings>().StartTutorialMusic();
         while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
         {
             yield return null;
