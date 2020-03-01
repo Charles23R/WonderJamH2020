@@ -139,6 +139,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
+    }
+
     public void onDeath()
     {
         GameObject[] toReEnable = GameObject.FindGameObjectsWithTag("Interactible");

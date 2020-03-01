@@ -318,7 +318,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 1000
   divider: 1.02
-  launchSpeed: 30
   dashSpeed: 750
   canJump: 1
   grounded: 1
@@ -329,6 +328,7 @@ MonoBehaviour:
   isMouse: 0
   portalCD: {fileID: 0}
   rope: {fileID: 0}
+  rageBarActive: 0
 --- !u!95 &4901910823979236402
 Animator:
   serializedVersion: 3

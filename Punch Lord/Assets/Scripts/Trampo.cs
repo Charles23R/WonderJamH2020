@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Trampo : MonoBehaviour
 {
-
+    Animator animator;
     public float bouncy;
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,7 +20,19 @@ public class Trampo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Player>().Jump(new Vector2(0, bouncy));
-        this.gameObject.GetComponent<Interactible>().DisableInstance();
+        if(collision.tag == "Player")
+        {
+            IEnumerator Stop()
+            {
+                yield return new WaitForSeconds(0.5009f);
+                animator.Play("New State");
+            }
+            StopCoroutine(Stop());
+            animator.Play("New State");
+            animator.Play("interact");
+            StartCoroutine(Stop());
+            collision.gameObject.GetComponent<Player>().Jump(new Vector2(0, bouncy));
+        }
+
     }
 }
