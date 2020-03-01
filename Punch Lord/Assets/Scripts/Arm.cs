@@ -15,6 +15,7 @@ public class Arm : MonoBehaviour
     public CinemachineVirtualCamera cinecam;
     public CinemachineBasicMultiChannelPerlin perlin;
     public float amplitude, frequency;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +86,7 @@ public class Arm : MonoBehaviour
 
     IEnumerator Particles()
     {
+        audioSource.Play();
         isEmitting = true;
         particles.Play();
         particles2.Play();

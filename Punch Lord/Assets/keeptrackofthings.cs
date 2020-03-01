@@ -24,6 +24,7 @@ public class keeptrackofthings : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        black = GameObject.FindGameObjectWithTag("Black");
         float alpha = 1;
         while (alpha > 0)
         {

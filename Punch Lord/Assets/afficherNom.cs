@@ -7,12 +7,16 @@ using TMPro;
 public class afficherNom : MonoBehaviour
 {
     public GameObject particleFX;
+    public AudioClip zonesound;
 
     IEnumerator afficherZone()
     {
         yield return new WaitForSeconds(1f);
         particleFX.SetActive(true);
+        gameObject.GetComponent<AudioSource>().clip = zonesound;
+        gameObject.GetComponent<AudioSource>().Play();
         yield return StartCoroutine(FadeIn());
+
         yield return new WaitForSeconds(2f);
         yield return StartCoroutine(FadeOut());
         yield return null;

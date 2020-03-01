@@ -34,12 +34,16 @@ public class changeLevel : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        float alpha = 0;
-        while (alpha < 1)
+        black = GameObject.FindGameObjectWithTag("Black");
+        if (black != null)
         {
-            alpha += 0.05f;
-            black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);
-            yield return null;
+            float alpha = 0;
+            while (alpha < 1)
+            {
+                alpha += 0.05f;
+                black.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+                yield return null;
+            }
         }
         yield return null;
     }
