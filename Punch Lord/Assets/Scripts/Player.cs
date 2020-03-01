@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider, launchSpeed;
-    public bool canJump = true, grounded = true, holdRope = false, grabbing = false;
+    public float speed, divider, dashSpeed;
+    public bool canJump = true, grounded = true, holdRope = false, grabbing = false, dashUsed = false;
     public Arm hitbox;
     private Vector3 spawnPos;
     public bool isMouse;
@@ -26,6 +26,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+
             isMouse = false;
             hitbox.punch = true;
             IEnumerator Stop()
@@ -37,6 +46,15 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+           
             hitbox.punch = true;
             IEnumerator Stop()
             {
@@ -44,6 +62,12 @@ public class Player : MonoBehaviour
                 hitbox.punch = false;
             }
             StartCoroutine(Stop());
+        }
+        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        {
+            dashUsed = true;
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashSpeed);
         }
         if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -62,7 +86,8 @@ public class Player : MonoBehaviour
         }
         if(holdRope && Input.GetButtonDown("Grab"))
         {
-            rb.velocity = rope.GetComponentInParent<Rigidbody2D>().velocity.normalized*launchSpeed;
+            RotationThing rt = rope.transform.parent.GetComponentInParent<RotationThing>();
+            rb.velocity = rope.transform.right * rt.launchSpeed * rt.cosAnswer * (Vector2.Distance(rope.transform.parent.parent.position,rope.transform.position)/rt.maxDistance);
             Destroy(rope);
             holdRope = false;
         }
@@ -80,6 +105,7 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
+        dashUsed = false;
         var pos = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 aim = new Vector2(0,0);
         Time.timeScale = 1;
@@ -98,6 +124,7 @@ public class Player : MonoBehaviour
     }
     public void Jump(Vector2 aim)
     {
+        dashUsed = false;
         grounded = false;
         rb.velocity = Vector2.zero;
         rb.AddForce(aim * speed);
@@ -109,6 +136,7 @@ public class Player : MonoBehaviour
         {
             grounded = true;
             canJump = true;
+            dashUsed = false;
         }
     }
 
@@ -129,5 +157,7 @@ public class Player : MonoBehaviour
         }
         this.transform.position = spawnPos;
     }
+
+
 
 }
