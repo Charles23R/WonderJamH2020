@@ -446,6 +446,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1080855607}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &460956875 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4901910823007569368, guid: 90e797a31e9f52743b95c5e008c1441f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1080855607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &460956878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135bb6f2e527ef8489dce0f90cfbb85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  main: {fileID: 1529695853}
+  target: {x: 0, y: 0, z: 0}
+  speed: 0
+  spriteNeutral: {fileID: 703086637001584232, guid: 332ffbc391d51cf47a285b98c3fa7099,
+    type: 3}
+  animator: {fileID: 460956875}
 --- !u!4 &534479314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4901910823967121456, guid: 90e797a31e9f52743b95c5e008c1441f,
@@ -937,25 +949,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4901910823007569368, guid: 90e797a31e9f52743b95c5e008c1441f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d411d190d5376b143b6042a4f403e0a8, type: 2}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.298
+      value: 0.528
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.078
+      value: -0.037
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569371, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
@@ -1023,6 +1040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4901910823979236558, guid: 90e797a31e9f52743b95c5e008c1441f,
+        type: 3}
+      propertyPath: poing
+      value: 
+      objectReference: {fileID: 460956878}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90e797a31e9f52743b95c5e008c1441f, type: 3}
 --- !u!1001 &1134965285
@@ -2232,6 +2254,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1529695854}
   - component: {fileID: 1529695855}
+  - component: {fileID: 1529695856}
+  - component: {fileID: 1529695857}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -2304,6 +2328,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1529695856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529695853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135bb6f2e527ef8489dce0f90cfbb85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  main: {fileID: 460956874}
+  target: {x: 0, y: 0, z: 0}
+  speed: 0
+  spriteNeutral: {fileID: -8029898917454667296, guid: 332ffbc391d51cf47a285b98c3fa7099,
+    type: 3}
+  animator: {fileID: 0}
+--- !u!95 &1529695857
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529695853}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d5b71017d5c33342ba770cf16f45054, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1572690815
 GameObject:
   m_ObjectHideFlags: 0

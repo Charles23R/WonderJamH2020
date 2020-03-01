@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public bool isMouse;
     Vector3 mousePos;
     public GameObject portalCD, rope;
+    public Poing poing;
     public bool rageBarActive;
 
 
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         rb.AddForce(aim.normalized * speed);
-        
+        poing.onPunch();
     }
     public void Jump(Vector2 aim)
     {
