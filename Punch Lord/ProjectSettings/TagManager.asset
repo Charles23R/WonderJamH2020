@@ -9,6 +9,8 @@ TagManager:
   - Button
   - Vent
   - TimeZone
+  - RageBar
+  - confinor
   layers:
   - Default
   - TransparentFX

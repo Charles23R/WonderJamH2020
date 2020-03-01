@@ -26,6 +26,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+
             isMouse = false;
             hitbox.punch = true;
             IEnumerator Stop()
@@ -37,6 +46,15 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+           
             hitbox.punch = true;
             IEnumerator Stop()
             {
@@ -135,12 +153,11 @@ public class Player : MonoBehaviour
         }
         for (int i = 0; i < ButtonstoReEnable.Length; i++)
         {
-            ButtonstoReEnable[i].GetComponent<Interactible>().lives = ButtonstoReEnable[i].GetComponent<Interactible>().initialLives;
-            ButtonstoReEnable[i].SetActive(true);
-            ButtonstoReEnable[i].GetComponent<Collider2D>().enabled = true;
-            ButtonstoReEnable[i].GetComponent<SpriteRenderer>().enabled = true;
+            ButtonstoReEnable[i].GetComponent<ButtonDisable>().Reset();
         }
         this.transform.position = spawnPos;
     }
+
+
 
 }
