@@ -8,6 +8,19 @@ public class ButtonDisable : MonoBehaviour
     public Sprite buttonPressed;
     public GameObject[] toDisable;
     // Start is called before the first frame update
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "HitBox")
+        {
+            if (collision.gameObject.GetComponent<Arm>().punch)
+            {
+                Debug.Log("child");
+                onAction();
+            }
+        }
+    }
+
     public void onAction()
     {
         for(int i =0; i<toDisable.Length; i++)

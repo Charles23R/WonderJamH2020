@@ -25,7 +25,6 @@ public class Poing : MonoBehaviour
             gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, GameObject.Find("TargetDoigt").transform.position, speed);
         }
         yield return new WaitForSeconds(0.5009f);
-        //animator.Play("poingStill");
 
         gameObject.transform.position = GameObject.Find("TargetPoing").transform.position;
         yield return null;
@@ -35,6 +34,4 @@ public class Poing : MonoBehaviour
     {
 
     }
-
-
 }
