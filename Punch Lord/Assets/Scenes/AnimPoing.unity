@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144989577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.10804224, y: 15.996761, z: -10}
+  m_LocalPosition: {x: -3.0621276, y: 15.996761, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135bb6f2e527ef8489dce0f90cfbb85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.01
   animator: {fileID: 460956875}
   start: {x: 0, y: 0, z: 0}
 --- !u!4 &534479314 stripped
@@ -984,12 +984,12 @@ PrefabInstance:
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.528
+      value: 0.307
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.037
+      value: 0.082
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823007569370, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223177052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.447, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1936825613}
@@ -2311,7 +2311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1529695854}
   - component: {fileID: 1529695855}
-  - component: {fileID: 1529695856}
   - component: {fileID: 1529695857}
   m_Layer: 0
   m_Name: GameObject (1)
@@ -2385,21 +2384,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1529695856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529695853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135bb6f2e527ef8489dce0f90cfbb85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.01
-  animator: {fileID: 0}
-  start: {x: 0, y: 0, z: 0}
 --- !u!95 &1529695857
 Animator:
   serializedVersion: 3
@@ -2598,6 +2582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901910823979236553, guid: 90e797a31e9f52743b95c5e008c1441f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4901910823979236558, guid: 90e797a31e9f52743b95c5e008c1441f,
         type: 3}
