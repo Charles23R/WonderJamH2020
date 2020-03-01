@@ -201,6 +201,7 @@ public class Player : MonoBehaviour
     {
         if (rageBarActive)
         {
+            GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().onPunch();
             if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
             {
                 GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;

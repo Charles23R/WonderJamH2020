@@ -7,15 +7,19 @@ public class RageBar : MonoBehaviour
 {
     public float progress;
     public float speed;
+    bool firstPunch;
     // Start is called before the first frame update
     void Start()
     {
         progress = 0;
+        firstPunch = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (firstPunch)
+        {
             progress += (speed * Time.deltaTime);
             this.gameObject.GetComponent<Slider>().value = progress;
             if(progress >= 1)
@@ -23,5 +27,12 @@ public class RageBar : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().onDeath();
                 progress = 0;
             }
+        }
+            
+    }
+
+    public void onPunch()
+    {
+        firstPunch = true;
     }
 }
