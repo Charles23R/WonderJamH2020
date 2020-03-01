@@ -163,7 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a52e14c0293eb48a93d52a284bab14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShaking: 0
   punch: 0
+  cinecam: {fileID: 0}
+  perlin: {fileID: 0}
+  amplitude: 0.3
+  frequency: 2
 --- !u!1 &4901910823979236553
 GameObject:
   m_ObjectHideFlags: 0

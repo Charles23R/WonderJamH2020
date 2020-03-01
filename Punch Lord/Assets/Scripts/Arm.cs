@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Arm : MonoBehaviour
 {
+    public bool isShaking;
     public bool punch;
+    public CinemachineVirtualCamera cinecam;
+    public CinemachineBasicMultiChannelPerlin perlin;
+    public float amplitude, frequency;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cinecam = FindObjectOfType<CinemachineVirtualCamera>();
+        perlin = cinecam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     // Update is called once per frame
@@ -30,7 +36,11 @@ public class Arm : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
         }
 
+    }
 
+    private void FixedUpdate()
+    {
+        
     }
 
     private void OnEnable()
@@ -38,9 +48,28 @@ public class Arm : MonoBehaviour
         
     }
 
+    IEnumerator ScreenShake()
+    {
+        perlin.m_AmplitudeGain = amplitude;
+        perlin.m_FrequencyGain = frequency;
+        yield return new WaitForSeconds(0.2f);
+        perlin.m_FrequencyGain = 0;
+        perlin.m_AmplitudeGain = 0;
+        yield return null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    } 
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (punch&& !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone"))
+        if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone"))
+        {
+            StartCoroutine(ScreenShake());
+        }
+        if (punch && !collision.gameObject.CompareTag("Vent") && !collision.gameObject.CompareTag("TimeZone"))
         {
             GetComponentInParent<Player>().Jump();
             if (collision.gameObject.CompareTag("Interactible"))
@@ -51,9 +80,9 @@ public class Arm : MonoBehaviour
             if (collision.gameObject.CompareTag("Button"))
             {
                 collision.gameObject.GetComponent<ButtonDisable>().onAction();
-                collision.gameObject.GetComponent<Interactible>().lives--;
             }
             punch = false;
         }
     }
+
 }
