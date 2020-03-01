@@ -5,40 +5,56 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider, dashSpeed;
+    public float speed, slowSpeed, realSpeed, divider, dashSpeed, slowDash, realDash;
     public bool canJump = true, grounded = true, holdRope = false, grabbing = false, dashUsed = false;
     public Arm hitbox;
     private Vector3 spawnPos;
     public bool isMouse;
+    public bool isSlow;
     Vector3 mousePos;
     public GameObject portalCD, rope;
+    public Poing poing;
     public bool rageBarActive;
+    public GameObject trail;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        realSpeed = speed;
+        slowSpeed = speed * 1 / 1.5f;
+        realDash = dashSpeed;
+        slowDash = dashSpeed / 1.5f;
         rb = GetComponent<Rigidbody2D>();
-        spawnPos = this.transform.position;
+        spawnPos = GameObject.Find("Respawn").transform.position;
+    }
+
+    IEnumerator DashTrail()
+    {
+        trail.GetComponent<TrailRenderer>().emitting = true;
+        yield return new WaitForSeconds(0.5f);
+        trail.GetComponent<TrailRenderer>().emitting = false;
+        yield return null;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetAxis("RTrigger") != 0)
+        {
+            speed = slowSpeed;
+            dashSpeed = slowDash;
+        }
+        else
+        {
+            speed = realSpeed;
+            dashSpeed = realDash;
+        }
+
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
-            if (rageBarActive)
-            {
-                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
-                }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-                }
-            }
-            
+            checkRage();
 
             isMouse = false;
             hitbox.punch = true;
@@ -51,17 +67,7 @@ public class Player : MonoBehaviour
         }
         else if ((Input.GetButtonDown("Jump") && isMouse))
         {
-            if (rageBarActive)
-            {
-                if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
-                }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
-                }
-            }
+            checkRage();
 
             hitbox.punch = true;
             IEnumerator Stop()
@@ -71,11 +77,21 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(Stop());
         }
-        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        if (!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded && !isMouse)
         {
+            checkRage();
             dashUsed = true;
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * dashSpeed);
+        }
+        else if(!holdRope && !dashUsed && Input.GetButtonDown("Dash") && !grounded)
+        {
+            checkRage();
+            dashUsed = true;
+            rb.velocity = Vector2.zero;
+            var pos = Camera.main.WorldToScreenPoint(transform.position);
+            rb.AddForce(new Vector2(Input.mousePosition.x - pos.x, Input.mousePosition.y - pos.y).normalized * dashSpeed);
+            StartCoroutine(DashTrail());
         }
         if (Input.mousePosition != mousePos && Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -84,6 +100,7 @@ public class Player : MonoBehaviour
         mousePos = Input.mousePosition;
         if (!holdRope && Input.GetButtonDown("Grab"))
         {
+            checkRage();
             grabbing = true;
             IEnumerator Stop()
             {
@@ -94,6 +111,7 @@ public class Player : MonoBehaviour
         }
         if(holdRope && Input.GetButtonDown("Grab"))
         {
+            checkRage();
             RotationThing rt = rope.transform.parent.GetComponentInParent<RotationThing>();
             rb.velocity = rope.transform.right * rt.launchSpeed * rt.cosAnswer * (Vector2.Distance(rope.transform.parent.parent.position,rope.transform.position)/rt.maxDistance);
             Destroy(rope);
@@ -128,7 +146,7 @@ public class Player : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         rb.AddForce(aim.normalized * speed);
-        
+        poing.onPunch();
     }
     public void Jump(Vector2 aim)
     {
@@ -148,6 +166,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
+    }
+
     public void onDeath()
     {
         GameObject[] toReEnable = GameObject.FindGameObjectsWithTag("Interactible");
@@ -162,10 +188,28 @@ public class Player : MonoBehaviour
         for (int i = 0; i < ButtonstoReEnable.Length; i++)
         {
             ButtonstoReEnable[i].GetComponent<ButtonDisable>().Reset();
+            for (int j = 0; j < ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable.Length; j++)
+            {
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<Collider2D>().enabled = true;
+                ButtonstoReEnable[i].GetComponent<ButtonDisable>().toDisable[j].GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
         this.transform.position = spawnPos;
     }
 
-
+    public void checkRage()
+    {
+        if (rageBarActive)
+        {
+            if (GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress >= 0.25)
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress -= 0.25f;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("RageBar").GetComponent<RageBar>().progress = 0;
+            }
+        }
+    }
 
 }
