@@ -5,11 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed, divider, dashSpeed;
+    public float speed, slowSpeed, realSpeed, divider, dashSpeed, slowDash, realDash;
     public bool canJump = true, grounded = true, holdRope = false, grabbing = false, dashUsed = false;
     public Arm hitbox;
     private Vector3 spawnPos;
     public bool isMouse;
+    public bool isSlow;
     Vector3 mousePos;
     public GameObject portalCD, rope;
     public Poing poing;
@@ -19,6 +20,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        realSpeed = speed;
+        slowSpeed = speed * 1 / 1.5f;
+        realDash = dashSpeed;
+        slowDash = dashSpeed / 1.5f;
         rb = GetComponent<Rigidbody2D>();
         spawnPos = GameObject.Find("Respawn").transform.position;
     }
@@ -26,6 +31,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetAxis("RTrigger") != 0)
+        {
+            speed = slowSpeed;
+            dashSpeed = slowDash;
+        }
+        else
+        {
+            speed = realSpeed;
+            dashSpeed = realDash;
+        }
+
         if (Input.GetButtonDown("Jump") && (Input.GetAxisRaw("Horizontal")!=0 || Input.GetAxisRaw("Vertical") != 0) && !holdRope)
         {
             checkRage();
@@ -119,7 +136,7 @@ public class Player : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         rb.AddForce(aim.normalized * speed);
-        poing.onPunch();
+        // poing.onPunch();
     }
     public void Jump(Vector2 aim)
     {
