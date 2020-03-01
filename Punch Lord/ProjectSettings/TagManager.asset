@@ -14,6 +14,7 @@ TagManager:
   - zoneText
   - Boss
   - Black
+  - Poing
   layers:
   - Default
   - TransparentFX

@@ -65,7 +65,7 @@ public class Arm : MonoBehaviour
         
     }
 
-    IEnumerator Punch()
+    public IEnumerator Punch()
     {
         isPunching = true;
         yield return new WaitForSeconds(0.3f);

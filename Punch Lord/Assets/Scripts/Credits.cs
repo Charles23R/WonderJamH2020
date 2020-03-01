@@ -67,6 +67,8 @@ public class Credits : MonoBehaviour
         Destroy(player);
         noLegs.GetComponent<Player>().enabled = false;
         yield return new WaitForSeconds(0.4f);
+        GameObject.Find("HitBox").transform.eulerAngles = new Vector3(0, 0, -45);
+        GameObject.FindGameObjectWithTag("Poing").GetComponent<Poing>().onPunch();
         noLegs.GetComponent<Rigidbody2D>().AddForce(new Vector2(1000, 1000));
         yield return new WaitForSeconds(2f);
         StartCoroutine(FadeOut());
