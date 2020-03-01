@@ -25,7 +25,7 @@ public class Portal : MonoBehaviour
             collision.gameObject.GetComponent<Player>().portalCD = other;
             collision.gameObject.transform.position = other.transform.position;
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.velocity = Vector3.Project(rb.velocity, other.transform.up);
+            rb.velocity = other.transform.up.normalized*rb.velocity.magnitude;
         }
     }
 

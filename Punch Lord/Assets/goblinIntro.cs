@@ -10,7 +10,7 @@ public class goblinIntro : MonoBehaviour
     public GameObject player, realPlayer;
     public GameObject black;
     public Transform goblindesiredpos;
-    public GameObject textbox1, textbox2;
+    public GameObject textbox1, textbox2, textbox3, textbox4;
     goblinmovement gmov;
     // Start is called before the first frame update
     void Start()
@@ -63,12 +63,6 @@ public class goblinIntro : MonoBehaviour
 
     IEnumerator Beginning()
     {
-        textbox1.SetActive(true);
-        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
-        {
-            yield return null;
-        }
-        textbox1.SetActive(false);
         yield return new WaitForSeconds(1f);
         textbox2.SetActive(true);
         player.SetActive(false);
@@ -79,6 +73,21 @@ public class goblinIntro : MonoBehaviour
             yield return null;
         }
         textbox2.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        textbox3.SetActive(true);
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
+        {
+            yield return null;
+        }
+        textbox3.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        textbox4.SetActive(true);
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetButtonDown("Jump"))
+        {
+            yield return null;
+        }
+        textbox4.SetActive(false);
+        yield return new WaitForSeconds(1f);
         yield return null;
     }
 
